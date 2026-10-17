@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: site-ingress
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: site.k3s.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: web-svc
+                port:
+                  number: 80
+          - path: /version
+            pathType: Prefix
+            backend:
+              service:
+                name: api-svc
+                port:
+                  number: 
